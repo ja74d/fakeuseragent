@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 header = {"User-Agent": UserAgent().random}
 
-r = requests.get('https://www.imdb.com/name/nm0634240/?ref_=fn_al_nm_1', headers=header).text
+r = requests.get('https://www.imdb.com/name/nm0000245/?ref_=nv_sr_srsg_0', headers=header).text
 #print(r)
 
 #r = requests.get('https://www.imdb.com/name/nm0634240/?ref_=fn_al_nm_1').text
@@ -24,3 +24,10 @@ knownfor = []
 for i in soup.find_all('div', class_='knownfor-title'):
     knownfor.append(i.text.replace('\n', ''))
 print(knownfor)
+
+
+movies = []
+filmography = soup.find('div', class_='filmo-category-section')
+for movie in filmography.find_all('div', class_='filmo-row odd') and filmography.find_all('div', class_='filmo-row odd'):
+    movies.append(movie.text)
+print(movies)
