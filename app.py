@@ -7,7 +7,20 @@ from bs4 import BeautifulSoup
 
 header = {"User-Agent": UserAgent().random}
 
-r = requests.get('https://www.imdb.com/name/nm0634240/?ref_=fn_al_nm_1', headers=header).text()
+r = requests.get('https://www.imdb.com/name/nm0634240/?ref_=fn_al_nm_1', headers=header).text
 #print(r)
 
+#r = requests.get('https://www.imdb.com/name/nm0634240/?ref_=fn_al_nm_1').text
+
 soup = BeautifulSoup(r, 'lxml')
+
+title = soup.find('title')
+print(title.text)
+
+mn = soup.find('div', class_='inline')
+print(mn.text)
+
+knownfor = []
+for i in soup.find_all('div', class_='knownfor-title'):
+    knownfor.append(i.text.replace('\n', ''))
+print(knownfor)
